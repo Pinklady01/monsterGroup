@@ -23,8 +23,9 @@ module.exports = function(app) {
     });
 
     app.get('/events', (req, res, next) => {
-       //res.json(eventController.findAll());
-       console.log(eventController.findAll());
+        eventController.findAll().then( (val) => {
+            res.json(val);
+        });
     });
 
     app.get('/events/:id', (req, res, next) => {
