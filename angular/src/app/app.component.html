@@ -1,0 +1,37 @@
+<style>
+  input.ng-invalid.ng-touched {
+    border: 3px red solid;
+  }
+</style>
+<div>
+  <form [formGroup]="userForm">
+    <label>
+      Login :<input id="login" name="login" type="text" formControlName="login"/>
+      <div *ngIf="login.value == '' && login.touched">Login is Required</div>
+    </label>
+    <div formGroupName="passwordForm">
+      <label>
+        password :
+        <input required type="password" formControlName="password"/>
+        <div *ngIf="password.value == '' && password.touched">password is Required
+        </div>
+      </label>
+      <label>
+        password confirmation :
+        <input required type="password" formControlName="passwordConfirm"/>
+        <div *ngIf="passwordConfirm.value == '' && passwordConfirm.touched">password confirmation is Required
+        </div>
+        <div *ngIf="passwordForm.dirty && passwordForm.hasError('matchError')">password does not match
+        </div>
+      </label>
+    </div>
+    <label>
+      birthYear :
+      <input required type="number" formControlName="birthYear"/>
+      <div *ngIf="passwordConfirm.value == '' && passwordConfirm.touched">year is Required
+      </div>
+    </label>
+    <button [disabled]="userForm.invalid" (click)="send()">Envoyer</button>
+    <button (click)="reset()">Reinitialiser</button>
+  </form>
+</div>
